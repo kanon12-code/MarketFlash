@@ -1,0 +1,1 @@
+This folder contains all SQL scripts necessary for creating, populating, and testing the Marketflash database, based on the requirements gathered from discussions with Markus, the owner of Marketflash. Each file in this folder is dedicated to a specific aspect of the database setup and validation.
