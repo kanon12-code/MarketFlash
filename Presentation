@@ -1,0 +1,14 @@
+# MarketFlash Project Presentation
+
+This video presentation provides an overview of the MarketFlash project, detailing the steps taken to transform raw, redundant data into a structured database and an interactive dashboard. The presentation is designed to give the general department team a clear understanding of how the data was organized and how the final dashboard meets their analytical needs.
+
+### Presentation Outline:
+1. **Initial Data Review**: Overview of the original datasets, highlighting data redundancy and the need for structuring.
+2. **Database Design**: Explanation of the Entity-Relationship Diagram (ERD), illustrating how data normalization reduced redundancy and improved data consistency.
+3. **Dashboard Walkthrough**: Demonstrates the final Tableau dashboard, with key features including KPI metrics, interactive visualizations, and filters for drilling down by Channel, Location, Audience, and Campaign Type.
+
+[Watch the Video Presentation on Loom](https://www.loom.com/share/5e3564e1e28e478d85f48fcbf30cef99?sid=eed1df34-45c5-4e7d-baa7-08a99471ef1d)
+
+---
+
+Project Complete! 
