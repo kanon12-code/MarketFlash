@@ -1,1 +1,131 @@
-This folder contains all SQL scripts necessary for creating, populating, and testing the Marketflash database, based on the requirements gathered from discussions with Markus, the owner of Marketflash. Each file in this folder is dedicated to a specific aspect of the database setup and validation.
+-- SQL Script for creating Tables with constraints defined in the ERD
+
+CREATE TABLE Channels (
+    ChannelID INT PRIMARY KEY,
+    Name VARCHAR(20) NOT NULL);
+
+CREATE TABLE Clients (
+    ClientID INT PRIMARY KEY,
+    CompanyName VARCHAR(20) NOT NULL,
+    CompanyAdd VARCHAR(255) NOT NULL,
+    Email VARCHAR(20) NOT NULL UNIQUE,
+    PhoneNumber VARCHAR(20) NOT NULL,
+    ContactPerson VARCHAR(255) NOT NULL);
+
+CREATE TABLE Campaigns (
+    CampaignID INT PRIMARY KEY,
+    StartDate DATE NOT NULL,
+    EndDate DATE NOT NULL,
+    ChannelID INT,
+    ClientID INT,
+    Audience VARCHAR(20) NOT NULL,
+    Likes INT,
+    Clicks INT,
+    Conversions INT,
+    Expense DECIMAL(10, 2),
+    CampaignType VARCHAR(20) NOT NULL,
+    TotalSales DECIMAL(10, 2),
+    ExecutiveID INT,
+    EmpID INT,
+    FOREIGN KEY (ChannelID) REFERENCES Channels(ChannelID),
+    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID),
+    FOREIGN KEY (EmpID) REFERENCES Employees(EmpID));
+
+CREATE TABLE Employees (
+    EmpID INT PRIMARY KEY,
+    FirstName VARCHAR(20) NOT NULL,
+    LastName VARCHAR(20) NOT NULL,
+    Address VARCHAR(200) NOT NULL,
+    Email VARCHAR(20) NOT NULL UNIQUE,
+    PhoneNumber VARCHAR(20),
+    Department VARCHAR(20) NOT NULL,
+    SupervisorID IN);
+
+
+-- SQL Script for Inserting Data into Tables
+
+INSERT INTO Channels (channel_id, name)
+VALUES
+(1, 'YouTube'),
+(2, 'Email'),
+(3, 'TikTok'),
+(4, 'Instagram'),
+(5, 'Facebook');
+
+
+INSERT INTO Clients (ClientID, CompanyName, Address, Email, PhoneNumber, ContactPerson) 
+VALUES
+(1, 'Lopez PLC', '0806 Watson Drive Suite 662, Port Andrea, DE 42578-2286', 'zmcintyre@bauer.info', '3724028579', 'Barbara Walker'),
+(2, 'Weaver, Garner and Ramos', '2933 Ortiz Overpass Suite 099, South Douglasburgh, KY 52632-7557', 'oscott@gmail.com', '498.978.7718x501', 'Melinda Johnston'),
+(3, 'Salinas-Chavez', '53637 Bonnie Walk Suite 961, South Adrianaport, IA 49560', 'richard84@hotmail.com', '2545622603', 'Chelsea Hoffman'),
+(4, 'Russell, Wilson and Rogers', '27907 Deborah Hill Suite 235, Abigailbury, CO 58408', 'michael78@yahoo.com', '(995)213-6315', 'Michael Howard'),
+(5, 'White Ltd', '172 Angela Crescent Apt. 306, North Laura, HI 69094-7497', 'jeremy56@gmail.com', '(320)185-3187x395', 'Nathan Weber');
+
+
+
+INSERT INTO Campaigns (CampaignID, StartDate, EndDate, ChannelID, ClientID, Audience, Likes, Clicks, Conversions, Expense, CampaignType, TotalSales, EmpID) 
+VALUES
+(1, '2023-12-18', '2024-01-10', 1, 1, 'Adults 18-40', 7718, 1056, 702, 13961.03, 'Sign Up', NULL, 6),
+(2, '2023-10-12', '2023-11-09', 2, 2, 'Female 60+', 8075, 1360, 182, 43804.31, 'Sales', 50878.17, 3),
+(3, '2023-05-18', '2023-06-04', 3, 3, 'Male 40-60', 2446, 1655, 669, 36007.47, 'Sales', 76729.41, 9),
+(4, '2023-02-23', '2023-03-09', 4, 4, 'Female 18-40', 1700, 2669, 243, 37425.85, 'Sales', 42784.94, 9),
+(5, '2023-11-20', '2023-12-11', 4, 5, 'Male 60+', 191, 4242, 753, 48590.34, 'Sales', 64163.39, 4);
+
+INSERT INTO Employees (EmpID, FirstName, LastName, Address, Email, PhoneNumber, Department, SupervisorID) 
+VALUES
+(1, 'Aaron', 'Faulkner', '123 Maple St, Springfield', 'aaron.faulkner@example.com', '555-123-4567', 'Media', NULL),
+(2, 'Becky', 'Brown', '456 Oak St, Rivertown', 'becky.brown@example.com', '555-234-5678', 'Media', 1),
+(3, 'Brandon', 'Townsend Jr.', '789 Pine St, Hillside', 'brandon.townsend@example.com', '555-345-6789', 'Media', 2),
+(4, 'Jesus', 'Rivera', '101 Cedar St, Greenfield', 'jesus.rivera@example.com', '555-456-7890', 'Media', 1),
+(5, 'Kyle', 'Serrano', '202 Birch St, Lakeside', 'kyle.serrano@example.com', '555-567-8901', 'Media', 1);
+
+UPDATE Campaigns SET Views = 23458 WHERE CampaignID = 1;
+UPDATE Campaigns SET Views = 92422 WHERE CampaignID = 2;
+UPDATE Campaigns SET Views = 45934 WHERE CampaignID = 3;
+UPDATE Campaigns SET Views = 30391 WHERE CampaignID = 4;
+UPDATE Campaigns SET Views = 52042 WHERE CampaignID = 5;
+
+SELECT * FROM Campaigns
+
+
+-- Join Queries to Test Relationships between Tables
+
+-- Campaigns and Channels (testing channel_id foreign key)
+SELECT c.campaign_id, c.campaign_type_id, ch.name AS channel_name
+FROM Campaigns c
+JOIN channels ch ON c.Channel_id = ch.Channel_id;
+
+-- Campaigns and Clients (testing client_id foreign key)
+SELECT c.campaign_id, c.campaign_type_id, cl.company_name AS client_name
+FROM Campaigns c
+JOIN clients cl ON c.client_id = cl.client_id;
+
+-- Campaigns and Employees (testing employee_id foreign key)
+SELECT c.campaign_id, c.campaign_type_id, e.employee_id
+FROM campaigns c
+JOIN employees e ON c.executive_id = e.employee_id;
+
+
+SELECT 
+    c.campaign_id,
+    c.start_date,
+    c.end_date,
+    ch.name AS channel_name,
+    cl.company_name AS client_name,
+    e.employee_name AS executive_name,
+    c.audience,
+    c.likes,
+    c.clicks,
+    c.conversion,
+    c.expense,
+    c.views,
+    c.engagement,
+    c.total_sales
+FROM 
+    campaigns c
+JOIN 
+    channels ch ON c.channel_id = ch.channel_id
+JOIN 
+    clients cl ON c.client_id = cl.client_id
+JOIN 
+    employees e ON c.executive_id = e.employee_id;
