@@ -17,8 +17,7 @@ This folder includes SQL file used to set up and test the MarketFlash database.
 ### [Viz-Dashboard](./Viz-Dashboard.png)
 Contains the final Tableau dashboard that provides insights into campaign performance across various dimensions. The dashboard includes KPIs, visualizations, and filters to enable detailed analysis by channel, location, audience, and campaign type. You can explore the live dashboard on Tableau.
 
-Explore the live dashboard on Tableau:
-[![Tableau](https://public.tableau.com/app/profile/kanon.mori/viz/MarketFlashCampaignPerformance_17309818406380/Dashboard)
+Explore the live dashboard on [![Tableau](https://img.shields.io/badge/Tableau-005FAD?style=for-the-badge&logo=tableau&logoColor=white)](https://public.tableau.com/app/profile/kanon.mori/viz/MarketFlashCampaignPerformance_17309818406380/Dashboard)
 
 ### [Presentation](./Presentation.mp4)
 This folder holds the final video presentation of the project. The presentation walks through the project steps, from the initial data structure to the final dashboard. 
@@ -26,6 +25,6 @@ This folder holds the final video presentation of the project. The presentation 
 ---
 
 ## Summary
-Through this project, **MarketFlash** I transformed redundant data into a structured database and interactive dashboard, providing actionable insights into marketing campaign performance. The project involved data normalization, relational database design, and the creation of a comprehensive Tableau dashboard, equipping MarketFlash with the tools for strategic marketing decisions.
+Through the **MarketFlash** project, I transformed redundant data into a structured database and interactive dashboard, providing actionable insights into marketing campaign performance. The project involved data normalization, relational database design, and the creation of a comprehensive Tableau dashboard, equipping MarketFlash with the tools for strategic marketing decisions.
 
 Thank you for visiting this repository, and enjoy exploring the project!
